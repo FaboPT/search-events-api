@@ -23,8 +23,8 @@ class LoginController extends Controller
         $this->verifyUser($request);
 
         return response()->json([
-            'access_token' => auth()->user()->createToken($request->input('email'))->plainTextToken,
-            'token_type' => 'Bearer',
+            'token' => auth()->user()->createToken($request->input('email'))->plainTextToken,
+            'type' => 'Bearer',
             'success' => true,
         ], Response::HTTP_OK);
 

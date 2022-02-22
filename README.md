@@ -92,13 +92,19 @@ Username : root
 Password: yourdatabasepassword
 ```
 
+### Run the Tests
+
+```
+docker-compose exec app php artisan test --testsuite=Feature
+```
+
 ### Endpoints
 
 > Headers must include Accept:application/json
 
 #### Create a Token
 
-- **POST** - http://localhost:8000/api/login
+- **POST** - http://localhost:8888/api/login
 
 ##### Data example
 

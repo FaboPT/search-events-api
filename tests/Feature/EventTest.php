@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Testing\Fluent\AssertableJson;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -31,15 +32,14 @@ class EventTest extends TestCase
     {
         $this->actingAs($this->user());
         $response = $this->search(['term' => 'Greece']);
-        $response->assertJsonFragment(["success" => true])->assertOk();
-
+        $this->ok($response);
     }
 
     public function testSearchOnlyDate()
     {
         $this->actingAs($this->user());
         $response = $this->search(['date' => '2021-04-06']);
-        $response->assertJsonFragment(["success" => true])->assertOk();
+        $this->ok($response);
 
     }
 
@@ -47,28 +47,28 @@ class EventTest extends TestCase
     {
         $this->actingAs($this->user());
         $response = $this->search(['date' => '2022-04-06']);
-        $response->assertJsonFragment(["success" => false])->assertNotFound();
+        $this->notFound($response);
     }
 
     public function testSearchOnlyTermNotFound()
     {
         $this->actingAs($this->user());
         $response = $this->search(['term' => 'xpto']);
-        $response->assertJsonFragment(["success" => false])->assertNotFound();
+        $this->notFound($response);
     }
 
     public function testSearchBothParametersNotFound()
     {
         $this->actingAs($this->user());
         $response = $this->search(['term' => 'Greece', 'date' => '2021-04-06']);
-        $response->assertJsonFragment(["success" => false])->assertNotFound();
+        $this->notFound($response);
     }
 
     public function testSearchBothParameters()
     {
         $this->actingAs($this->user());
         $response = $this->search(['term' => 'Greece', 'date' => '2021-05-10']);
-        $response->assertJsonFragment(["success" => true])->assertOk();
+        $this->ok($response);
     }
 
     public function testSearchDateNotValidate()
@@ -76,5 +76,19 @@ class EventTest extends TestCase
         $this->actingAs($this->user());
         $response = $this->search(['term' => 'Greece', 'date' => '2021-13-10']);
         $response->assertJsonValidationErrorFor("date")->assertUnprocessable();
+    }
+
+    private function ok(TestResponse $response): void
+    {
+        $response->assertJsonPath("success", true)
+            ->assertJson(fn(AssertableJson $json) => $json->hasAll('success', 'events'))
+            ->assertOk();
+    }
+
+    private function notFound(TestResponse $response): void
+    {
+        $response->assertJsonPath("success", false)
+            ->assertJson(fn(AssertableJson $json) => $json->hasAll('success', 'message'))
+            ->assertNotFound();
     }
 }

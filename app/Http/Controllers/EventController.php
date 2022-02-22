@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EventRequest;
 use App\Services\EventService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
@@ -24,6 +26,12 @@ class EventController extends Controller
      */
     public function search(EventRequest $request): JsonResponse
     {
-       return $this->eventService->search($request->all());
+        Log::build([
+            'driver' => 'single',
+            'path' => storage_path('logs/access-search-endpoint.log'),
+        ])->info('User ' . Auth::user()->name . ' search ' . implode(' and ', $request->all()));
+
+
+        return $this->eventService->search($request->all());
     }
 }

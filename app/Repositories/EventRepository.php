@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Traits\Utils\JsonFile;
 
+
 class EventRepository
 {
     use JsonFile;

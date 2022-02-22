@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
+
+
     private EventService $eventService;
 
     /**
@@ -21,6 +23,32 @@ class EventController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *      path="/api/events/search",
+     *      tags={"Events"},
+     *      summary="Search the events",
+     *      description="Returns list of events",
+     *     @OA\Parameter (
+     *      name="term",
+     *          in="query",
+     *          required=false,
+     *     ),
+     *     @OA\Parameter (
+     *      name="date",
+     *          in="query",
+     *          required=false,
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *
+     *      )
+     *     )
+     *
      * @param EventRequest $request
      * @return JsonResponse
      */

@@ -21,6 +21,9 @@ class EventRequest extends FormRequest
      *
      * @return array
      */
+    /* @OA\Property(format="string", default="", description="term", property="term"), */
+    /* @OA\Property(format="date", default="", description="date", property="date"), */
+
     public function rules()
     {
         return [

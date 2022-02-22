@@ -20,7 +20,7 @@ class EventRepository
     private function searchInFile(mixed $json, string $term = null, string $date = null): array
     {
         if (!$term && !$date)
-            return $json;
+            return [];
 
         $response = [];
 

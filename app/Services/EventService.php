@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Repositories\EventRepository;
 use App\Traits\ResponseAPI;
 use Illuminate\Http\JsonResponse;
-
+use Symfony\Component\HttpFoundation\Response;
 
 class EventService
 {
@@ -26,6 +26,12 @@ class EventService
      */
     public function search(array $data): JsonResponse
     {
-        return $this->success($this->eventRepository->search($data), 'events');
+        $json = $this->eventRepository->search($data);
+
+        if (empty($json)) {
+            return $this->error("Not Found Events", Response::HTTP_NOT_FOUND);
+
+        }
+        return $this->success($json, 'events');
     }
 }

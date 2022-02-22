@@ -9,13 +9,13 @@ trait ResponseAPI
 {
     /**
      * Send any success response
+     * @param array|null $data
+     * @param string $nameData
      * @param string|null $message
      * @param int $statusCode
-     * @param object|null $data
-     * @param string $nameData
      * @return JsonResponse
      */
-    public function success(object $data = null, string $nameData = 'data', string $message = null, int $statusCode = Response::HTTP_OK): JsonResponse
+    public function success(array $data = null, string $nameData = 'data', string $message = null, int $statusCode = Response::HTTP_OK): JsonResponse
     {
         return $this->coreResponse($statusCode, $message, true, $data, $nameData);
     }
@@ -37,11 +37,11 @@ trait ResponseAPI
      * @param int $statusCode
      * @param string|null $message
      * @param bool $isSuccess
-     * @param object|null $data
+     * @param array|null $data
      * @param string $nameData
      * @return JsonResponse
      */
-    private function coreResponse(int $statusCode, string $message = null, bool $isSuccess = true, object $data = null, string $nameData = 'data'): JsonResponse
+    private function coreResponse(int $statusCode, string $message = null, bool $isSuccess = true, array $data = null, string $nameData = 'data'): JsonResponse
     {
         return response()->json($this->responseData($isSuccess, $nameData, $data, $message), $statusCode);
     }
@@ -49,12 +49,12 @@ trait ResponseAPI
     /**
      * Method to generate the response data
      * @param bool $isSuccess
-     * @param object|null $data
-     * @param string|null $message
      * @param string $nameData
+     * @param array $data
+     * @param string|null $message
      * @return array
      */
-    private function responseData(bool $isSuccess, string $nameData, object $data = null, string $message = null): array
+    private function responseData(bool $isSuccess, string $nameData, array $data = [], string $message = null): array
     {
         return $data ?
             [

@@ -24,7 +24,6 @@ class EventController extends Controller
      */
     public function search(EventRequest $request): JsonResponse
     {
-        dd($request->all());
-        $this->eventService->search($request->all());
+       return $this->eventService->search($request->all());
     }
 }

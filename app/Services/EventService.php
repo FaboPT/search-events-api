@@ -26,6 +26,6 @@ class EventService
      */
     public function search(array $data): JsonResponse
     {
-        $this->success($this->eventRepository->search($data), 'events');
+        return $this->success($this->eventRepository->search($data), 'events');
     }
 }

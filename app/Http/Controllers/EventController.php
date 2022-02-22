@@ -24,19 +24,19 @@ class EventController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/events/search",
-     *      tags={"Events"},
+     *      path="/events/search",
+     *      tags={"Authorize.Events"},
      *      summary="Search the events",
      *      description="Returns list of events",
      *     @OA\Parameter (
      *      name="term",
      *          in="query",
-     *          required=false,
+     *
      *     ),
      *     @OA\Parameter (
      *      name="date",
      *          in="query",
-     *          required=false,
+     *
      *     ),
      *      @OA\Response(
      *          response=200,

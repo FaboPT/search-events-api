@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('swagger', function () {
+    Artisan::call('l5-swagger:generate');
+    $this->comment('Generate swagger docs successfully');
+})->purpose('Generate swagger docs');

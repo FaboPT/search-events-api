@@ -98,6 +98,14 @@ Password: yourdatabasepassword
 docker-compose exec app php artisan test --testsuite=Feature
 ```
 
+### Generate Swagger
+
+```
+docker-compose exec app php artisan swagger
+```
+
+#### URL http://localhost:8888/api/docs
+
 ### Endpoints
 
 > Headers must include Accept:application/json
@@ -112,6 +120,18 @@ docker-compose exec app php artisan test --testsuite=Feature
 {
     "email":"example@example.com",
     "password": "password",
+}
+````
+
+#### EVENTS
+
+- **GET** - http://localhost:8888/api/events/search
+
+##### Data example
+
+````
+{
+     http://localhost:8888/api/events/search?term=Malta&date=2021-04-05
 }
 ````
 

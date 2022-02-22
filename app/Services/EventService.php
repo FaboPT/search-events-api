@@ -28,10 +28,8 @@ class EventService
     {
         $json = $this->eventRepository->search($data);
 
-        if (empty($json)) {
-            return $this->error("Not Found Events", Response::HTTP_NOT_FOUND);
-
-        }
-        return $this->success($json, 'events');
+        return empty($json) ?
+            $this->error("Not Found Events", Response::HTTP_NOT_FOUND) :
+            $this->success($json, 'events');
     }
 }

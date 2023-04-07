@@ -7,16 +7,12 @@ use App\Services\EventService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use OpenApi\Annotations as OA;
 
 class EventController extends Controller
 {
-
-
     private EventService $eventService;
 
-    /**
-     *
-     */
     public function __construct(EventService $eventService)
     {
         $this->eventService = $eventService;

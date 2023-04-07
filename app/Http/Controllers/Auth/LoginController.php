@@ -35,7 +35,7 @@ class LoginController extends Controller
      *
      * @throws AuthenticationException
      */
-    private function verifyUser(LoginRequest $request)
+    private function verifyUser(LoginRequest $request): void
     {
         if (!Auth::attempt($request->all())) {
             throw new AuthenticationException(trans('auth.failed'));

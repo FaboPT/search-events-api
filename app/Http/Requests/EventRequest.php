@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use OpenApi\Annotations as OA;
 
 class EventRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class EventRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -24,7 +25,7 @@ class EventRequest extends FormRequest
     /* @OA\Property(format="string", default="", description="term", property="term"), */
     /* @OA\Property(format="date", default="", description="date", property="date"), */
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'term' => 'nullable | string',

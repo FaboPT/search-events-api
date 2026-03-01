@@ -17,7 +17,7 @@ services:
         networks:
             - search-events
     mysql:
-        image: mysql:8
+        image: mysql:lts
         container_name: mysql_search_events
         restart: unless-stopped
         tty: true
